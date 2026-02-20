@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Халачи — гостиница в Дербенте</title>
+  <meta name="description" content="Гостиница «Халачи» в Дербенте: уютные номера, завтраки, туры и экскурсии. Онлайн-заявка на бронирование." />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header__row">
+      <a class="brand" href="#top" aria-label="На главную">
+        <span class="brand__logo" aria-hidden="true"></span>
+        <span>Халачи</span>
+      </a>
+      <nav class="nav" aria-label="Навигация">
+        <a href="#rooms">Номера</a>
+        <a href="#amenities">Услуги</a>
+        <a href="#tours">Туры</a>
+        <a href="#location">Расположение</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+      <div class="header__cta">
+        <span class="badge" id="hotelPhone">+7 (000) 000-00-00</span>
+        <button class="btn btn--primary" id="openBooking">Забронировать</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero__grid">
+        <div class="hero__card">
+          <div class="hero__content">
+            <div class="kicker"><span class="kicker__dot"></span>Гостиница в Дербенте</div>
+            <h1 class="h1" id="hotelTitle">Добро пожаловать в «Халачи»</h1>
+            <p class="sub" id="hotelTagline">Комфорт и гостеприимство в сердце древнего города.</p>
+          </div>
+          <div class="widget">
+            <p class="widget__title">Быстрая заявка</p>
+            <div class="form-grid">
+              <div class="field">
+                <div class="label">Заезд</div>
+                <input class="input" type="date" id="quickCheckIn" />
+              </div>
+              <div class="field">
+                <div class="label">Выезд</div>
+                <input class="input" type="date" id="quickCheckOut" />
+              </div>
+              <div class="field">
+                <div class="label">Гости</div>
+                <select id="quickGuests">
+                  <option value="1">1 гость</option>
+                  <option value="2" selected>2 гостя</option>
+                  <option value="3">3 гостя</option>
+                  <option value="4">4+ гостей</option>
+                </select>
+              </div>
+              <div class="field">
+                <div class="label">Номер</div>
+                <select id="quickRoom">
+                  <option value="">Любой номер</option>
+                </select>
+              </div>
+            </div>
+            <div class="widget__actions">
+              <button class="btn btn--primary" id="quickSubmit">Отправить</button>
+              <span class="small">Менеджер свяжется в течение ~15 минут</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__card hero__media" aria-label="Фото гостиницы">
+          <img id="heroImage" alt="Фото гостиницы" src="" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="rooms">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <h2 class="h2">Наши номера</h2>
+            <p class="p">Выберите идеальный номер для комфортного отдыха</p>
+          </div>
+          <div class="filters" id="roomFilters"></div>
+        </div>
+        <div class="grid" id="roomsGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="amenities">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <h2 class="h2">Услуги и удобства</h2>
+            <p class="p">Всё, чтобы отдых был спокойным и удобным</p>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="card"><div class="card__body"><h3 class="card__title">Завтраки</h3><div class="card__meta"><span class="pill">включено</span></div><p class="p">Ежедневно: вкусно, быстро и по-домашнему.</p></div></div>
+          <div class="card"><div class="card__body"><h3 class="card__title">Парковка</h3><div class="card__meta"><span class="pill">бесплатно</span></div><p class="p">Свободные места рядом со входом.</p></div></div>
+          <div class="card"><div class="card__body"><h3 class="card__title">Wi‑Fi</h3><div class="card__meta"><span class="pill">быстрый</span></div><p class="p">Подходит для видеозвонков и работы.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="tours">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <h2 class="h2">Туры и экскурсии</h2>
+            <p class="p">Откройте для себя красоту Дагестана</p>
+          </div>
+          <div class="filters" id="tourFilters"></div>
+        </div>
+        <div class="grid" id="toursGrid"></div>
+      </div>
+    </section>
+
+    <section class="section" id="location">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <h2 class="h2">Расположение</h2>
+            <p class="p" id="hotelAddress">—</p>
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="box">
+            <h3 class="card__title" style="margin-top:0">Что рядом</h3>
+            <ul class="list">
+              <li>Море и набережная — ~10–15 минут пешком</li>
+              <li>Старый город и Нарын‑Кала — ~10 минут на авто</li>
+              <li>Кафе, магазины, аптека — рядом</li>
+            </ul>
+            <div style="height:10px"></div>
+            <p class="p" id="hotelAbout">—</p>
+          </div>
+          <div class="map" id="mapBox">
+            Карта (можно вставить iframe Яндекс/Google в app.js)
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contacts">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <h2 class="h2">Бронирование</h2>
+            <p class="p">Оставьте заявку — мы уточним детали и подтвердим бронирование</p>
+          </div>
+          <button class="btn btn--primary" id="openBooking2">Открыть форму</button>
+        </div>
+
+        <div class="split">
+          <div class="box">
+            <h3 class="card__title" style="margin-top:0">Контакты</h3>
+            <p class="p"><b>Телефон:</b> <span id="contactPhone">—</span></p>
+            <p class="p"><b>Email:</b> <span id="contactEmail">—</span></p>
+            <p class="p"><b>Адрес:</b> <span id="contactAddress">—</span></p>
+            <p class="p"><b>Заезд/выезд:</b> <span id="contactTimes">—</span></p>
+            <p class="small">© <span id="year"></span> Гостиница «Халачи»</p>
+          </div>
+          <div class="box">
+            <h3 class="card__title" style="margin-top:0">Отзывы</h3>
+            <div id="reviewsBox" class="p">Загрузка...</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div>
+        <div class="brand" style="margin-bottom:8px"><span class="brand__logo"></span><span>Халачи</span></div>
+        <div class="p">Гостиница в Дербенте — ваш комфортный отдых.</div>
+        <div class="small" id="statsLine" style="margin-top:10px"></div>
+      </div>
+      <div>
+        <div class="card__title">Навигация</div>
+        <div class="p"><a href="#rooms">Номера</a> · <a href="#tours">Туры</a> · <a href="#location">Как добраться</a></div>
+      </div>
+      <div>
+        <div class="card__title">Админ-панель</div>
+        <div class="p"><a href="/admin">Открыть /admin</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Booking modal -->
+  <div class="modal" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
+    <div class="modal__panel">
+      <div class="modal__head">
+        <div class="modal__title" id="bookingTitle">Заявка на бронирование</div>
+        <button class="iconbtn" id="closeBooking" aria-label="Закрыть">✕</button>
+      </div>
+      <div class="modal__body">
+        <div class="form-grid">
+          <div class="field">
+            <div class="label">Ваше имя *</div>
+            <input class="input" id="bName" placeholder="Например, Фархад" />
+          </div>
+          <div class="field">
+            <div class="label">Телефон *</div>
+            <input class="input" id="bPhone" placeholder="+7 ..." />
+          </div>
+          <div class="field">
+            <div class="label">Email</div>
+            <input class="input" id="bEmail" placeholder="name@mail.com" />
+          </div>
+          <div class="field">
+            <div class="label">Номер</div>
+            <select id="bRoom"><option value="">Любой номер</option></select>
+          </div>
+          <div class="field">
+            <div class="label">Заезд</div>
+            <input class="input" type="date" id="bCheckIn" />
+          </div>
+          <div class="field">
+            <div class="label">Выезд</div>
+            <input class="input" type="date" id="bCheckOut" />
+          </div>
+          <div class="field">
+            <div class="label">Гости</div>
+            <select id="bGuests">
+              <option value="1">1 гость</option>
+              <option value="2" selected>2 гостя</option>
+              <option value="3">3 гостя</option>
+              <option value="4">4+ гостей</option>
+            </select>
+          </div>
+          <div class="field">
+            <div class="label">Тур (опционально)</div>
+            <select id="bTour"><option value="">Без тура</option></select>
+          </div>
+        </div>
+        <div class="field" style="margin-top:10px">
+          <div class="label">Комментарий</div>
+          <textarea id="bNotes" placeholder="Пожелания по времени/номеру, детская кроватка и т.д."></textarea>
+        </div>
+        <div class="widget__actions">
+          <button class="btn btn--primary" id="bSubmit">Отправить заявку</button>
+          <span class="small">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>

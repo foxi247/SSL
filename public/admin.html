@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin — Халачи</title>
+  <link rel="stylesheet" href="/css/admin.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar__row">
+      <div class="brand"><span class="brand__dot"></span><span>Халачи · Admin</span></div>
+      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap">
+        <input class="input" id="adminPass" placeholder="Пароль (x-admin-password)" style="max-width:260px" />
+        <button class="btn btn--primary" id="btnLogin">Войти</button>
+        <button class="btn" id="btnBackup" title="Скачать backup">Бэкап</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="layout">
+      <aside class="side" id="sideNav">
+        <a href="#dashboard" data-page="dashboard" class="is-active">🏠 Дашборд</a>
+        <a href="#hotel" data-page="hotel">🏨 Гостиница</a>
+        <a href="#rooms" data-page="rooms">🛏️ Номера</a>
+        <a href="#tours" data-page="tours">🧭 Туры</a>
+        <a href="#categories" data-page="categories">🏷️ Категории</a>
+        <a href="#bookings" data-page="bookings">📩 Заявки</a>
+        <a href="#settings" data-page="settings">⚙️ Настройки</a>
+        <div class="small" style="margin-top:10px">Совет: пароль по умолчанию <b>halachi2024</b></div>
+      </aside>
+
+      <section class="main">
+
+        <div class="panel" data-view="dashboard">
+          <h1 class="h1">Дашборд</h1>
+          <div class="grid">
+            <div class="kpi"><div class="small">Номеров</div><div class="kpi__v" id="kpiRooms">—</div></div>
+            <div class="kpi"><div class="small">Туров</div><div class="kpi__v" id="kpiTours">—</div></div>
+            <div class="kpi"><div class="small">Заявок</div><div class="kpi__v" id="kpiBookings">—</div></div>
+          </div>
+          <div style="height:12px"></div>
+          <div class="small">Недавние заявки</div>
+          <div id="recentBookings" class="small" style="margin-top:8px">—</div>
+        </div>
+
+        <div class="panel" data-view="hotel" style="display:none">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+            <h1 class="h1" style="margin:0">Информация о гостинице</h1>
+            <button class="btn btn--primary" id="saveHotel">Сохранить</button>
+          </div>
+          <div style="height:10px"></div>
+          <div class="grid" style="grid-template-columns:repeat(2,1fr)">
+            <div><div class="small">Название</div><input class="input" id="hName" /></div>
+            <div><div class="small">Телефон</div><input class="input" id="hPhone" /></div>
+            <div><div class="small">Email</div><input class="input" id="hEmail" /></div>
+            <div><div class="small">Адрес</div><input class="input" id="hAddress" /></div>
+            <div><div class="small">Заезд</div><input class="input" id="hCheckIn" /></div>
+            <div><div class="small">Выезд</div><input class="input" id="hCheckOut" /></div>
+          </div>
+          <div style="height:10px"></div>
+          <div><div class="small">Слоган</div><input class="input" id="hTagline" /></div>
+          <div style="height:10px"></div>
+          <div><div class="small">Описание</div><textarea id="hDesc"></textarea></div>
+          <div style="height:10px"></div>
+          <div><div class="small">О гостинице</div><textarea id="hAbout"></textarea></div>
+          <div style="height:10px"></div>
+          <div class="grid" style="grid-template-columns:1fr 1fr">
+            <div>
+              <div class="small">Hero image URL</div>
+              <input class="input" id="hHero" placeholder="https://..." />
+              <div class="small" style="margin-top:8px">или загрузить:</div>
+              <input class="input" type="file" id="hHeroFile" accept="image/*" />
+            </div>
+            <div>
+              <div class="small">Превью</div>
+              <div style="border:1px solid var(--line);border-radius:16px;overflow:hidden;background:rgba(255,255,255,0.04);min-height:160px">
+                <img id="hHeroPreview" alt="preview" style="width:100%;height:160px;object-fit:cover;display:block" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" data-view="rooms" style="display:none">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+            <h1 class="h1" style="margin:0">Номера</h1>
+            <button class="btn btn--primary" id="addRoom">➕ Добавить</button>
+          </div>
+          <table class="table" style="margin-top:10px">
+            <thead><tr><th>Название</th><th>Цена</th><th>Гостей</th><th>Действия</th></tr></thead>
+            <tbody id="roomsTable"></tbody>
+          </table>
+        </div>
+
+        <div class="panel" data-view="tours" style="display:none">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+            <h1 class="h1" style="margin:0">Туры</h1>
+            <button class="btn btn--primary" id="addTour">➕ Добавить</button>
+          </div>
+          <table class="table" style="margin-top:10px">
+            <thead><tr><th>Название</th><th>Цена</th><th>Категория</th><th>Действия</th></tr></thead>
+            <tbody id="toursTable"></tbody>
+          </table>
+        </div>
+
+        <div class="panel" data-view="categories" style="display:none">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+            <h1 class="h1" style="margin:0">Категории</h1>
+            <button class="btn btn--primary" id="addCategory">➕ Добавить</button>
+          </div>
+          <table class="table" style="margin-top:10px">
+            <thead><tr><th>Иконка</th><th>Название</th><th>Действия</th></tr></thead>
+            <tbody id="catsTable"></tbody>
+          </table>
+        </div>
+
+        <div class="panel" data-view="bookings" style="display:none">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+            <h1 class="h1" style="margin:0">Заявки</h1>
+            <button class="btn" id="refreshBookings">Обновить</button>
+          </div>
+          <table class="table" style="margin-top:10px">
+            <thead><tr><th>Дата</th><th>Имя</th><th>Телефон</th><th>Даты</th><th>Статус</th><th>Действия</th></tr></thead>
+            <tbody id="bookingsTable"></tbody>
+          </table>
+        </div>
+
+        <div class="panel" data-view="settings" style="display:none">
+          <h1 class="h1">Настройки</h1>
+          <div class="grid" style="grid-template-columns:1fr 1fr">
+            <div>
+              <div class="small">Счётчик посетителей</div>
+              <input class="input" id="visCount" type="number" min="0" />
+              <div style="height:8px"></div>
+              <button class="btn btn--primary" id="saveVis">Сохранить</button>
+            </div>
+            <div>
+              <div class="small">Смена пароля администратора</div>
+              <input class="input" id="newPass" placeholder="Новый пароль (мин 6 символов)" />
+              <div style="height:8px"></div>
+              <button class="btn btn--primary" id="savePass">Изменить</button>
+              <div class="small" style="margin-top:8px">Внимание: пароль используется как заголовок <b>x-admin-password</b>.</div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+  <div class="modal" id="modal">
+    <div class="modal__panel">
+      <div class="modal__head">
+        <div id="modalTitle" style="font-weight:900">—</div>
+        <button class="btn" id="modalClose">Закрыть</button>
+      </div>
+      <div class="modal__body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>
